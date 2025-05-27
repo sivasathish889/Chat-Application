@@ -1,7 +1,7 @@
 "use client";
 import { Provider } from "react-redux";
 import "./globals.css";
-import store from "./redux/store";
+import store from "@/src/app/redux/store";
 import { Toaster } from "sonner";
 
 export default function RootLayout({

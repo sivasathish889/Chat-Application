@@ -1,16 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { setVerifyOtp } from "../../redux/slices/otpVerifySlice";
 
 const Login = () => {
   const route = useRouter();
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,10 +20,8 @@ const Login = () => {
         if (data.data.success) {
           toast.success(data.data.message);
           route.push("/verifyOtp");
-          dispatch(setVerifyOtp(data.data.otp));
           setLoading(false);
         }
-        toast.error(data.data.message);
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.message) {
@@ -69,7 +64,7 @@ const Login = () => {
                 />
               </div>
               <div className="signup flex  items-center ">
-                <p className="text-xs">If You don't have account? &nbsp; </p>
+                <p className="text-xs">If You don't have account?  </p>
                 <Link href={"/sign-up"} className="underline text-sm">
                   Sign Up
                 </Link>

@@ -1,29 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/src/app/redux/store";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const VerifyOtp = () => {
   const route = useRouter();
-  const { otp } = useSelector((state: RootState) => state.otp);
   const [loading, setLoading] = useState<boolean>(false);
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    formData.append('verifyOtp', String(otp))
     setLoading(true);
     await axios
       .post("api/verifyOtp", formData)
       .then((data) => {
+        console.log(data.data);
         if (data.data.success) {
           toast.success(data.data.message);
           route.replace("/");
           setLoading(false);
-        } 
+        }
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.message) {

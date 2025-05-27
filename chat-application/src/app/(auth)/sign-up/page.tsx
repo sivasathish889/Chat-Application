@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { FaCamera, FaRegUserCircle, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Login = () => {
   const route = useRouter()
@@ -82,11 +83,12 @@ const Login = () => {
                   onChange={handleSetProfile}
                 />
                 {preview ? (
-                  <img
+                  <Image
                     src={preview}
                     alt="Profile Preview"
                     className="rounded-full object-cover"
                     style={{ width: 100, height: 100 }}
+                    
                   />
                 ) : (
                   <FaRegUserCircle size={100} strokeWidth={0} />
