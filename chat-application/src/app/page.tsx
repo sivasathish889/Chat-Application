@@ -5,14 +5,14 @@ import SideBar from "./components/SideBar";
 
 export default function Home() {
   return (
-    <div className=" flex flex-row gap-2 h-screen bg-gray-100">
-      <section className="w-60 min-w-40 bg-primary rounded-2xl m-2  max-md:hidden">
+    <div className=" flex flex-row gap-1 h-screen bg-gray-100">
+      <section className="w-60 min-w-40 bg-primary max-md:hidden">
         <SideBar />
       </section>
-      <main className="main bg-lime-500 flex flex-1 min-w-96">
+      <main className="main border border-zinc-500 flex flex-1 min-w-96">
         <Main />
       </main>
-      <section className="profileBar bg-teal-600 flex w-60 max-xl:hidden">
+      <section className="profileBar bg-teal-600 flex w-60 max-lg:hidden">
         <ProfileBar />
       </section>
     </div>
