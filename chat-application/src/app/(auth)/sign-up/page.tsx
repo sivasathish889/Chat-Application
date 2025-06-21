@@ -88,7 +88,8 @@ const Login = () => {
                     alt="Profile Preview"
                     className="rounded-full object-cover"
                     style={{ width: 100, height: 100 }}
-                    
+                    width={100}
+                    height={100}
                   />
                 ) : (
                   <FaRegUserCircle size={100} strokeWidth={0} />

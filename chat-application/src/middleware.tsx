@@ -10,22 +10,16 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get("__token")?.value || "";
   const isPublic = publicRoutes.includes(req.nextUrl.pathname);
 
-  if (!token && !isPublic) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
-
   if (token && isPublic) {
     return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  if (token && !isPublic) {
+  } else if (!token && !isPublic) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  } else if (token && !isPublic) {
     return NextResponse.next();
-  }
-
-  if (!token && isPublic) {
+  } else if (!token && isPublic) {
     return NextResponse.next();
+  } else {
   }
-
   return NextResponse.next();
 }
 

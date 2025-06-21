@@ -39,7 +39,11 @@ export async function POST(req: NextRequest) {
       };
       await sendMail(maildata);
       const response = NextResponse.json(
-        { message: "OTP Send Successfully", success: true, otp: randomOtp },
+        {
+          message: "OTP Send Successfully",
+          success: true,
+          otp: randomOtp,
+        },
         { status: 200 }
       );
       const hashingOtp = sign(
@@ -52,7 +56,7 @@ export async function POST(req: NextRequest) {
       const hashingUserId = sign(
         { _id: user._id },
         process.env.JWT_SECRET_KEY as string,
-        {algorithm : "HS384"}
+        { algorithm: "HS384" }
       );
       response.cookies.set("__otp__string", hashingOtp);
       response.cookies.set("__token", hashingUserId);
