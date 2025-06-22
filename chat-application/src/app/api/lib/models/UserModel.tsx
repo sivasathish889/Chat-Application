@@ -34,6 +34,9 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  contact : {
+    type : [mongoose.Types.ObjectId],
+  }
 });
 
 const userModel = mongoose.models.User || mongoose.model("User", UserSchema);

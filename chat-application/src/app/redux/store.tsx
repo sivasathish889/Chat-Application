@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/UserSlice";
 import expandNavReducer from "./slices/navBarSlice";
+import msgStoreInChatSlice from "./slices/msgStoreInChatSlice";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     expandNav: expandNavReducer,
+    setMsgStoreInChat: msgStoreInChatSlice,
   },
 });
 
