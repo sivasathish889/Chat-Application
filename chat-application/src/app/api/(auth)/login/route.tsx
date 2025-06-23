@@ -46,20 +46,15 @@ export async function POST(req: NextRequest) {
         },
         { status: 200 }
       );
+
       const hashingOtp = sign(
-        { otp: randomOtp },
+        { otp: randomOtp, _id: user._id },
         process.env.JWT_SECRET_KEY as string,
         {
           algorithm: "HS256",
         }
       );
-      const hashingUserId = sign(
-        { _id: user._id },
-        process.env.JWT_SECRET_KEY as string,
-        { algorithm: "HS384" }
-      );
       response.cookies.set("__otp__string", hashingOtp);
-      response.cookies.set("__token", hashingUserId);
       return response;
     } else {
       return NextResponse.json(

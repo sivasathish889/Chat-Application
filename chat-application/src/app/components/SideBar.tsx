@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ProfileCard from "./SideBar/ProfileCard";
 import StatusCard from "./SideBar/StatusCard";
 import { CgProfile } from "react-icons/cg";
@@ -12,14 +12,13 @@ export interface statusDataProps {
 }
 
 export interface chatDataProps {
-  name : string,
-  image : React.JSX.Element,
-  recentChat : string,
-  date : string
+  name: string;
+  image: React.JSX.Element;
+  recentChat: string;
+  date: string;
 }
 
 const SideBar = () => {
-  const status = "online";
   const statusData: statusDataProps[] = [
     {
       image: <CgProfile className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9" />,
@@ -58,33 +57,33 @@ const SideBar = () => {
     },
   ];
 
-  const chatData : chatDataProps[] = [
+  const chatData: chatDataProps[] = [
     {
-      image: <CgProfile  className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9"/>,
+      image: <CgProfile className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9" />,
       name: "Siva Sathish",
       recentChat: "How Are you",
       date: "11:00 pm",
     },
     {
-      image: <CgProfile  className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9"/>,
+      image: <CgProfile className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9" />,
       name: "Siva ",
       recentChat: "How Are you",
       date: "11:00 pm",
     },
     {
-      image: <CgProfile  className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9"/>,
+      image: <CgProfile className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9" />,
       name: "Sathish",
       recentChat: "How Are you",
       date: "11:00 pm",
     },
     {
-      image: <CgProfile  className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9"/>,
+      image: <CgProfile className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9" />,
       name: "Santhiya",
       recentChat: "How Are you",
       date: "11:00 pm",
     },
     {
-      image: <CgProfile  className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9"/>,
+      image: <CgProfile className="h-9 w-9 min-h-2 max-h-9 min-w-2 max-w-9" />,
       name: "Sivasangaran",
       recentChat: "How Are you",
       date: "11:00 pm",
@@ -92,7 +91,7 @@ const SideBar = () => {
   ];
   return (
     <div className="">
-      <ProfileCard status={status} />
+      <ProfileCard />
       <StatusCard data={statusData} />
       <SearchBar />
       <ChatList data={chatData} />

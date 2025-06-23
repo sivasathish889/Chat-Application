@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ["Online", "Offline"],
-    default : "Online"
+    default: "Online",
   },
   friends: {
     type: mongoose.Types.ObjectId,
@@ -34,9 +34,19 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  contact : {
-    type : [mongoose.Types.ObjectId],
-  }
+  contact: [
+    {
+      from_inviter: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+      status: {
+        type: Number,
+        enum: [0, 1, 2], // 0: noInvite, 1: pending, 2: accept
+        default: 0,
+      },
+    },
+  ],
 });
 
 const userModel = mongoose.models.User || mongoose.model("User", UserSchema);

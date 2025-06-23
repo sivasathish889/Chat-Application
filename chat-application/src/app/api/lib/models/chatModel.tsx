@@ -3,23 +3,24 @@ import mongoose from "mongoose";
 const chatSchema = new mongoose.Schema(
   {
     from_user: {
-      type: String,
-      required: true,
-    },
-    to_user: {
       type: mongoose.Schema.ObjectId,
       required: true,
+      ref: "Users",
+    },
+    to_user: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Users",
     },
     from_msg: {
       type: String,
-      required: true,
     },
     to_msg: {
       type: String,
-      required: true,
     },
-    msgRead: {
-      enum: ["yes", "no"],
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

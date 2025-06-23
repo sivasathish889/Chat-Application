@@ -46,7 +46,7 @@ const VerifyOtp = () => {
 
               <div className="inputfiled3 flex flex-col">
                 <input
-                  type="otp"
+                  type="number"
                   name="otp"
                   id="otp"
                   placeholder="Enter OTP"
