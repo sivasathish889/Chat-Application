@@ -1,7 +1,8 @@
 
-type contactType = {
+export type friendType = {
     status : number,
-    _id : string
+    _id : string,
+    inviter_user : string
 }
 
 export type userType = {
@@ -13,5 +14,5 @@ export type userType = {
     password : string,
     phone : number,
     __v ?: number,
-    contact : [contactType]
+    friend : [friendType]
 }

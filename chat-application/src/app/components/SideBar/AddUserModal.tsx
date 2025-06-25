@@ -6,6 +6,7 @@ import { RiUserSearchLine } from "react-icons/ri";
 import Image from "next/image";
 import getAvatarSrc from "../../helpers/getAvatarFormat";
 import { userType } from "../../types/user.type";
+import { toast } from "sonner";
 
 type ModalProps = {
   modalIsOpen: boolean;
@@ -28,10 +29,15 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
   const handleSearch = async () => {
     try {
       await axios.get(`/api/searchUser?email=${search}`).then((res) => {
-        console.log("api", JSON.parse(res.data));
-        setResults(JSON.parse(res.data) || []);
+        if (JSON.parse(res.data).success) {
+          setResults(JSON.parse(res.data).users || []);
+        } else {
+          toast.error(JSON.parse(res.data).message);
+        }
       });
-    } catch (err) {}
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
   };
 
   const handleSelect = useCallback((userId: string) => {
@@ -40,16 +46,31 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
   }, []);
 
   const handleInvite = async () => {
-    const formData = new FormData()
-    formData.append('inviterId', optionSelect)
+    const formData = new FormData();
+    formData.append("inviterId", optionSelect);
     try {
       await axios
-        .post("api/inviteUser",formData)
-        .then((res) => console.log(res))
+        .post("api/inviteUser", formData)
+        .then((res) => {
+          if (res.data.success) {
+            setResults([])
+            setOptionSelect("")
+            toast.success(res.data.message);
+          } else {
+            throw new Error(res.data.message);
+          }
+        })
         .catch((err) => {
-          console.log(err);
+          if (err.response && err.response.data && err.response.data.message) {
+            toast.error(err.response.data.message);
+          }
+        })
+        .finally(() => {
+          closeModal();
         });
-    } catch (error) {}
+    } catch (error) {
+      toast.error("something went wrong");
+    }
   };
   return (
     <>
@@ -94,7 +115,7 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
               onClick={handleSearch}
             />
           </div>
-          {results.length > 0 && (
+          {results ?  (
             <ul className="bg-white rounded shadow p-2 max-h-40 overflow-y-auto">
               {results.map((user: userType, index) => (
                 <li
@@ -116,7 +137,7 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
                 </li>
               ))}
             </ul>
-          )}
+          ) :<p>no invite</p>}
           <button
             className="border bg-primary py-1 rounded-sm"
             onClick={handleInvite}

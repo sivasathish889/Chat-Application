@@ -4,8 +4,10 @@ import { hashSync } from "bcryptjs";
 import { promises as fs } from "fs";
 import path from "path";
 import { v4 as uuid } from "uuid";
+import dbConnection from "../../lib/db";
 
 export async function POST(req: NextRequest) {
+  dbConnection()
   try {
     const form = await req.formData();
     const file = form.get("profileImage") as File;

@@ -23,33 +23,40 @@ const NavBar = () => {
     setIsOpen(false);
   }
   return (
-    <div>
+    <>
       <div className="container flex flex-col h-screen  bg-lime-300">
         <div
-          className="option-icon text-center m-4 cursor-pointer"
+          className="option-icon text-center my-4 cursor-pointer"
           onClick={toggle}
         >
           {expandNav ? (
-            <CiMenuFries strokeWidth={2} />
+            <div className="flex justify-center">
+              <CiMenuFries strokeWidth={2} className="self-center" />
+            </div>
           ) : (
-            <div className="flex justify-end items-end">
+            <div className="flex justify-end items-end me-2">
               <GiCancel size={17} />
             </div>
           )}
         </div>
 
-        <div className="option-icon text-center m-2 space-y-5">
-          <div className="flex items-center gap-1 cursor-pointer">
+        <div className="option-icon text-center self-center space-y-5">
+          <div className="flex items-center gap-1 cursor-pointer px-2">
             <IoChatbubblesOutline size={24} strokeWidth={0.6} />
             {!expandNav ? <p className="text-sm">Chats</p> : <></>}
           </div>
 
-          <div className="flex items-center gap-1 cursor-pointer" onClick={openModal}>
+          <div
+            className={`flex items-center gap-1 cursor-pointer px-2 py-1 ${
+              modalIsOpen ? "bg-primary px-2 py-1 rounded-sm" : ""
+            }`}
+            onClick={openModal}
+          >
             <MdGroupAdd size={24} />
             {!expandNav ? <p className="text-sm">Invite</p> : <></>}
           </div>
         </div>
-        <div className="settng flex  items-end h-full m-3 text-center  cursor-pointer">
+        <div className="settng flex  items-end h-full self-center  cursor-pointer">
           <div className="flex items-center gap-1">
             <CiSettings size={24} strokeWidth={0.6} />
             {!expandNav ? <p className="text-sm">Settings</p> : <></>}
@@ -64,7 +71,7 @@ const NavBar = () => {
         </div>
       </div>
       <InvitaionModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
-    </div>
+    </>
   );
 };
 

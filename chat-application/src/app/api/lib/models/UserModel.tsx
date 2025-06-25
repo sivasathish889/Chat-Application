@@ -34,9 +34,9 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  contact: [
+  friend: [
     {
-      from_inviter: {
+      inviter_user: {
         type: mongoose.Types.ObjectId,
         ref: "User",
       },
