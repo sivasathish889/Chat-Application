@@ -7,15 +7,24 @@ import { RootState } from "../redux/store";
 import { GiCancel } from "react-icons/gi";
 import { MdGroupAdd } from "react-icons/md";
 import InvitaionModal from "./Nav/InvitaionModal";
-
+import { setToggleChatToContact } from "../redux/slices/chatToContactTogle";
+import type { ChatToContactToggleStateProp } from "../redux/slices/chatToContactTogle";
+import { IoMdContacts } from "react-icons/io";
 const NavBar = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const expandNav = useSelector((state: RootState) => state.expandNav);
+  const chatToContactToggle = useSelector(
+    (state: RootState) => state.chatToContactToggleSLice
+  );
+
   const dispatch = useDispatch();
   const toggle = () => {
     dispatch(setExpandNav());
   };
 
+  const toggleContactToChat = (propertyName: ChatToContactToggleStateProp) => {
+    dispatch(setToggleChatToContact(propertyName));
+  };
   function openModal() {
     setIsOpen(true);
   }
@@ -41,11 +50,28 @@ const NavBar = () => {
         </div>
 
         <div className="option-icon text-center self-center space-y-5">
-          <div className="flex items-center gap-1 cursor-pointer px-2">
+          <div
+            className={`flex items-center gap-1 cursor-pointer px-2 ${
+              chatToContactToggle === "chats"
+                ? "bg-primary px-2 py-1 rounded-sm"
+                : ""
+            }`}
+            onClick={() => toggleContactToChat("chats")}
+          >
             <IoChatbubblesOutline size={24} strokeWidth={0.6} />
             {!expandNav ? <p className="text-sm">Chats</p> : <></>}
           </div>
-
+          <div
+            className={`flex items-center gap-1 cursor-pointer px-2 ${
+              chatToContactToggle === "contacts"
+                ? "bg-primary px-2 py-1 rounded-sm"
+                : ""
+            }`}
+            onClick={() => toggleContactToChat("contacts")}
+          >
+            <IoMdContacts size={24} strokeWidth={0.6} />
+            {!expandNav ? <p className="text-sm">Chats</p> : <></>}
+          </div>
           <div
             className={`flex items-center gap-1 cursor-pointer px-2 py-1 ${
               modalIsOpen ? "bg-primary px-2 py-1 rounded-sm" : ""

@@ -1,10 +1,7 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 
 const Chats = () => {
-    const msgstoreInChat = useSelector((state: RootState)=>state.setMsgStoreInChat)
   
   return (
     <div className=" h-full mx-2 flex flex-col justify-end overflow-y-scroll ">
@@ -20,7 +17,7 @@ const Chats = () => {
 
       <div className="from-chat flex justify-end items-end">
         <div className="chat-message p-2 bg-primary rounded-lg flex justify-center items-center   ">
-          <div className="message text-sm">{msgstoreInChat.message}</div>
+          <div className="message text-sm">hellow</div>
           <div className="time text-[.4em] opacity-50 self-end">11:00 pm</div>
         </div>
         <div className="profile flex justify-center items-center ">

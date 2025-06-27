@@ -26,13 +26,13 @@ const ProfileCard = () => {
     <>
       <div className="profile-card flex justify-center items-center px-2 py-2">
         <div className="profile-pic rounded-full">
-          <div className=" p-2 rounded-full ">
+          <div className=" rounded-full w-16 h-16 overflow-hidden">
             <Image
               src={getAvatarSrc(userData.avatar)}
               width={100}
               height={100}
               alt="avatar"
-              style={{width:"auto", height : "auto"}}
+              style={{width:"100%", height : "100%", objectFit : "cover"}}
               loading="lazy"
             />
           </div>

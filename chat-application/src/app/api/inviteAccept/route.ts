@@ -29,16 +29,13 @@ export async function POST(req: NextRequest) {
     );
     await userModel.findOneAndUpdate(
       {
-        _id: inviter_id,
-        "friend.inviter_user": { $ne: currentUserId._id },
+      _id: inviter_id,
+      "friend.inviter_user": currentUserId._id,
       },
       {
-        $push: {
-          friend: {
-            inviter_user: currentUserId._id,
-            status: 2,
-          },
-        },
+      $set: {
+        "friend.$.status": 2,
+      },
       },
       { new: true }
     );

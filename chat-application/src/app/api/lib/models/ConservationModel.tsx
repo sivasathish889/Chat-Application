@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const chatSchema = new mongoose.Schema(
+const conservationSchema = new mongoose.Schema(
   {
     from_user: {
       type: mongoose.Schema.ObjectId,
@@ -26,6 +26,6 @@ const chatSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const chatModel = mongoose.models.Chat || mongoose.model("Chat", chatSchema);
+const ConservationModal = mongoose.models.Conservation || mongoose.model("Conservation", conservationSchema);
 
-export default chatModel;
+export default ConservationModal;

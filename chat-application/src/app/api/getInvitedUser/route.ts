@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import userModel from "../lib/models/UserModel";
 import dbConnection from "../lib/db";
-import { verify } from "jsonwebtoken";
+import { JwtPayload, verify } from "jsonwebtoken";
 import { friendType, userType } from "../../types/user.type";
 
 export async function GET(req: NextRequest) {
@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const currentUserData = (await verify(
     cookie as string,
     process.env.JWT_SECRET_KEY as string
-  )) as { _id: string };
+  )) as JwtPayload;
   try {
     const currentUser = await userModel.findOne(
       { _id: currentUserData._id, "friend.status": "1" }

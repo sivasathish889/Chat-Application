@@ -10,9 +10,9 @@ export type userType = {
     username : string,
     email : string,
     avatar : string,
-    statud : string,
-    password : string,
-    phone : number,
+    status? : string,
+    password? : string,
+    phone? : number,
     __v ?: number,
-    friend : [friendType]
+    friend? : [friendType]
 }

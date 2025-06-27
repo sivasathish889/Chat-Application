@@ -7,11 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMsgStoreInChat } from "../../redux/slices/msgStoreInChatSlice";
 
 const MessageSendBar = () => {
-  const dispatch = useDispatch()
-  const handleSendData = ()=>{
-    dispatch(setMsgStoreInChat({message : inputData || "", date : new Date().toISOString() }))
-    setInputData('')
-  }
+
   const [emojiOpen, setEmojiOpen] = useState<boolean>(false);
   const [inputData, setInputData] = useState<string | null>("");
   const handleEmojiClick = useCallback(
@@ -55,7 +51,7 @@ const MessageSendBar = () => {
           className="absolute right-4 bottom-2 cursor-pointer"
         />
       </div>
-      <div className="send-message m-2 bg-primary p-2 rounded-full cursor-pointer" onClick={handleSendData}>
+      <div className="send-message m-2 bg-primary p-2 rounded-full cursor-pointer" >
         <PiTelegramLogoBold size={20} className="opacity-70" />
       </div>
     </div>

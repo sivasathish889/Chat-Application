@@ -9,6 +9,7 @@ import { RootState } from "./redux/store";
 
 export default function Home() {
   const expandNav = useSelector((state: RootState) => state.expandNav);
+
   return (
     <div className="flex flex-row gap-1 h-screen bg-gray-100">
       <nav
@@ -16,7 +17,7 @@ export default function Home() {
           expandNav ? "w-10" : "w-24"
         }`}
       >
-        <NavBar />
+        <NavBar  />
       </nav>
       <section className="w-60 min-w-40 bg-primary max-md:hidden transition-all duration-300">
         <Suspense fallback={"Loading..."}>
