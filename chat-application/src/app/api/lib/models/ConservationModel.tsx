@@ -2,20 +2,17 @@ import mongoose from "mongoose";
 
 const conservationSchema = new mongoose.Schema(
   {
-    from_user: {
+    senderId: {
       type: mongoose.Schema.ObjectId,
       required: true,
       ref: "Users",
     },
-    to_user: {
+    recieverID: {
       type: mongoose.Types.ObjectId,
       required: true,
       ref: "Users",
     },
-    from_msg: {
-      type: String,
-    },
-    to_msg: {
+    message: {
       type: String,
     },
     status: {
@@ -26,6 +23,8 @@ const conservationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const ConservationModal = mongoose.models.Conservation || mongoose.model("Conservation", conservationSchema);
+const ConservationModal =
+  mongoose.models.Conservation ||
+  mongoose.model("Conservation", conservationSchema);
 
 export default ConservationModal;

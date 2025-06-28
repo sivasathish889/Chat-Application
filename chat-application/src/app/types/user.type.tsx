@@ -14,5 +14,5 @@ export type userType = {
     password? : string,
     phone? : number,
     __v ?: number,
-    friend? : [friendType]
+    friend : [friendType]
 }

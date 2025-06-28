@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnection from "../lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
-import userModel from "../lib/models/UserModel";
+import userModel from "@/src/app/api/lib/models/UserModel";
+import dbConnection from "@/src/app/api/lib/db";
 
 export async function GET(req: NextRequest) {
   try {

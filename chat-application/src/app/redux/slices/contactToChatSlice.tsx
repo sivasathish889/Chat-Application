@@ -1,19 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { friendType, userType } from "../../types/user.type";
 
-const friendState: friendType = {
-  inviter_user: "",
-  _id: "",
-  status: 0,
-};
+// const friendState: friendType = {
+//   inviter_user: "",
+//   _id: "",
+//   status: 0,
+// };
 const initialState: userType = {
   username: "",
   _id: "",
   avatar: "",
   email: "",
-  status: "",
-   phone: 0,
-  friend: [friendState],
 };
 const contactToChatSlice = createSlice({
   initialState,

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import ConservationModal from "../lib/models/ConservationModel";
-import dbConnection from "../lib/db";
+import ConservationModal from "@/src/app/api/lib/models/ConservationModel";
+import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
 
 export async function GET(req: NextRequest) {
@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
     const params = req.nextUrl.searchParams;
     const to_userId = params.get("id") || "";
     const chats = await ConservationModal.find({
-      from_user: currentUserId,
-      to_user: to_userId,
+      senderId: currentUserId,
+      recieverID: to_userId,
     });
     return NextResponse.json(
       { message: "Chats Fetched", success: true, chats },

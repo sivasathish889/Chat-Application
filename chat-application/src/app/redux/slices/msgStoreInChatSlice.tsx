@@ -1,26 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
 type initialStateProp = {
-    message : string,
-    date : string
-}
-const initialState :initialStateProp={
-    message : "",
-    date : ""
-}
+  senderId?: string;
+  receiverId?: string;
+  message: string;
+  createdAt: string;
+  chatStatus: "Sender" | "Receiver";
+};
+const initialState: initialStateProp[] = [
+  {
+    senderId: "",
+    receiverId: "",
+    message: "",
+    createdAt: "",
+    chatStatus: "Sender",
+  },
+];
 
 const msgStoreInChat = createSlice({
-    initialState,
-    name : "msgStoreInChat",
-    reducers  : {
-        setMsgSender : (state, action: PayloadAction<initialStateProp>)=>{
-            state.message = action.payload.message;
-            state.date = action.payload.date
-        }   
-    }
-})
+  initialState,
+  name: "msgStoreInChat",
+  reducers: {
+    setMsgStoreInChat: (state, action: PayloadAction<initialStateProp>) => {
+      state.push({
+        message: action.payload.message,
+        receiverId: action.payload.receiverId,
+        senderId: action.payload.senderId,
+        createdAt: action.payload.createdAt,
+        chatStatus: action.payload.chatStatus,
+      });
+    },
+  },
+});
 
-
-export const setMsgStoreInChat = msgStoreInChat.actions.setMsgSender
-export default msgStoreInChat.reducer
+export const setMsgStoreInChat = msgStoreInChat.actions.setMsgStoreInChat;
+export default msgStoreInChat.reducer;

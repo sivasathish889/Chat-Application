@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import userModel from "../lib/models/UserModel";
-import dbConnection from "../lib/db";
+import userModel from "@/src/app/api/lib/models/UserModel";
+import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
-import { friendType, userType } from "../../types/user.type";
+import { friendType, userType } from "@/src/app/types/user.type";
 
 export async function GET(req: NextRequest) {
   dbConnection();

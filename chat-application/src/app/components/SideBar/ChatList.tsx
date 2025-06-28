@@ -20,29 +20,29 @@ const ChatList = () => {
   const [isChatSelect, setIsChatSelect] = useState("");
   const dispatch = useDispatch();
   const chatData: chatDataProps[] = [
-    {
-      avatar:
-        "C:\\Users\\sumit\\Desktop\\Projects\\Chat Application\\chat-application\\public\\uploads\\fff69d4d-3926-465f-aa57-6bddb5ceb21dDSC_0555.JPG",
-      username: "Siva Sathish",
-      recentChat: "How Are you",
-      date: "11:00 pm",
-      _id: "685b5e809af53a0ff09db55c",
-      email: "sathishsathish96489@gmail.com ",
-    },
-    {
-      avatar:
-        "C:\\Users\\sumit\\Desktop\\Projects\\Chat Application\\chat-application\\public\\uploads\\fff69d4d-3926-465f-aa57-6bddb5ceb21dDSC_0555.JPG",
-      username: "Siva ",
-      recentChat: "How Are you",
-      date: "11:00 pm",
-      _id: "685b57e09af53a0ff09db4d3",
-      email: "rdxsathish@gmail.com ",
-    },
+    // {
+    //   avatar:
+    //     "C:\\Users\\sumit\\Desktop\\Projects\\Chat Application\\chat-application\\public\\uploads\\fff69d4d-3926-465f-aa57-6bddb5ceb21dDSC_0555.JPG",
+    //   username: "Siva Sathish",
+    //   recentChat: "How Are you",
+    //   date: "11:00 pm",
+    //   _id: "685b5e809af53a0ff09db55c",
+    //   email: "sathishsathish96489@gmail.com ",
+    // },
+    // {
+    //   avatar:
+    //     "C:\\Users\\sumit\\Desktop\\Projects\\Chat Application\\chat-application\\public\\uploads\\fff69d4d-3926-465f-aa57-6bddb5ceb21dDSC_0555.JPG",
+    //   username: "Siva ",
+    //   recentChat: "How Are you",
+    //   date: "11:00 pm",
+    //   _id: "685b57e09af53a0ff09db4d3",
+    //   email: "rdxsathish@gmail.com ",
+    // },
   ];
   const currentChatUser = useSelector(
     (state: RootState) => state.setContactToChat
   );
-  chatData.unshift(currentChatUser);
+  currentChatUser.username !== "" ? chatData.unshift(currentChatUser) : "";
   useEffect(() => {
     setIsChatSelect(currentChatUser._id);
   }, []);
@@ -60,7 +60,6 @@ const ChatList = () => {
       console.log(error);
     }
   };
-  console.log(isChatSelect)
   return (
     <div>
       <header className="mb-1 px-1 font-semibold">
@@ -76,8 +75,8 @@ const ChatList = () => {
               key={index}
               onClick={() => {
                 handleSelect(_id, username, email, avatar);
-                setIsChatSelect(_id)
-                dispatch(setCurrentChatUser({ _id, username, email, avatar }))
+                setIsChatSelect(_id);
+                dispatch(setCurrentChatUser({ _id, username, email, avatar }));
               }}
             >
               <div className="flex gap-1">
