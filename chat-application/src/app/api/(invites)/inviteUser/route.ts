@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import userModel from "../lib/models/UserModel";
-import dbConnection from "../lib/db";
+import userModel from "@/src/app/api/lib/models/UserModel";
+import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
 
 export async function POST(req: NextRequest) {

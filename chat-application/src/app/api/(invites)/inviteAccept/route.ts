@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnection from "../lib/db";
-import userModel from "../lib/models/UserModel";
+import userModel from "@/src/app/api/lib/models/UserModel";
+import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
 
 export async function POST(req: NextRequest) {
@@ -22,12 +22,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await userModel.findOneAndUpdate(
+    // Update the current user's friend status where inviter_user matches inviter_id
+    await userModel.updateOne(
       { _id: currentUserId._id, "friend.inviter_user": inviter_id },
-      { $set: { "friend.$.status": 2 } },
-      { new: true }
+      { $set: { "friend.$.status": 2 } }
     );
-    await userModel.findOneAndUpdate(
+
+    const updateResult = await userModel.findOneAndUpdate(
       {
       _id: inviter_id,
       "friend.inviter_user": currentUserId._id,
@@ -39,6 +40,26 @@ export async function POST(req: NextRequest) {
       },
       { new: true }
     );
+
+    if (!updateResult) {
+      await userModel.updateOne(
+      { _id: inviter_id },
+      {
+        $push: {
+        friend: {
+          inviter_user: currentUserId._id,
+          status: 2,
+        },
+        },
+      }
+      );
+    }
+    // if (updateResult.modifiedCount === 0) {
+    //   return NextResponse.json(
+    //     { message: "No invitation found to accept", success: false },
+    //     { status: 404 }
+    //   );
+    // }
     return NextResponse.json(
       {
         message: "Invitation accepted successfully",

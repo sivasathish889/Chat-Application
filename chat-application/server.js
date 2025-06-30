@@ -9,7 +9,8 @@ const app = express();
 const server = createServer(app);
 let hostname = "localhost";
 let port = 3001;
-
+const ConservationModel = require("./src/app/api/lib/models/ConservationModel.js");
+const dbServerCon = require("./db.js");
 app.use(cookieParser());
 app.use(
   cors({
@@ -29,32 +30,38 @@ const io = new Server(server, {
   },
   cookie: true,
 });
+dbServerCon();
 
 let users = {};
 io.on("connection", (socket) => {
   if (socket.handshake.headers.cookie) {
-    const userId = verify(
-      socket.handshake.headers.cookie.split("=")[1].split(";")[0],
-      process.env.JWT_SECRET_KEY
-    )._id;
-    users[userId] = socket.id;
+    const cookies = socket.handshake.headers.cookie
+      .split(";")
+      .map((cookie) => cookie.trim());
+    const tokenCookie = cookies.find((cookie) => cookie.startsWith("__token="));
+    const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+    const userId = token ? verify(token, process.env.JWT_SECRET_KEY)._id : null;
+    if (userId) {
+      users[userId] = socket.id;
+    }
 
     socket.on("message", (data) => {
-      const currentDate = new Date();
       const userId = Object.keys(users).find((key) => users[key] === socket.id);
-      const formattedDate = currentDate.toLocaleString();
       socket.emit("sender", {
         message: data.inputData,
         senderId: userId,
         receiverId: data.currentChatUserId,
-        createdAt: formattedDate,
+      });
+      ConservationModel.create({
+        message: data.inputData,
+        senderId: userId,
+        receiverId: data.currentChatUserId,
       });
       const senderId = users[data.currentChatUserId];
       socket.broadcast.to(senderId).emit("recievedMsg", {
         message: data.inputData,
         senderId: userId,
         receiverId: data.currentChatUserId,
-        createdAt: formattedDate,
       });
     });
   }

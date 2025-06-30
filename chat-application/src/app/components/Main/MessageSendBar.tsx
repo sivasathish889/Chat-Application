@@ -37,8 +37,6 @@ const MessageSendBar = () => {
           message: msg.message,
           senderId: msg.senderId,
           receiverId: msg.receiverId,
-          createdAt: msg.createdAt,
-          chatStatus: "Receiver",
         })
       );
     });
@@ -48,8 +46,6 @@ const MessageSendBar = () => {
           message: msg.message,
           senderId: msg.senderId,
           receiverId: msg.receiverId,
-          createdAt: msg.createdAt,
-          chatStatus: "Sender",
         })
       );
     });

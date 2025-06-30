@@ -1,7 +1,6 @@
 export type messageType = {
-  senderId?: string;
-  receiverId?: string;
+  senderId: string;
+  receiverId: string;
   message: string;
-  createdAt: string;
-  chatStatus : "Sender" | "Receiver"
+  createdAt?: string;
 };

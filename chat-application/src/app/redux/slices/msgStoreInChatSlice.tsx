@@ -1,34 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type initialStateProp = {
-  senderId?: string;
-  receiverId?: string;
+export type Msg = {
   message: string;
-  createdAt: string;
-  chatStatus: "Sender" | "Receiver";
+  senderId: string;
+  receiverId: string;
+  createdAt?: string;
 };
-const initialState: initialStateProp[] = [
-  {
-    senderId: "",
-    receiverId: "",
-    message: "",
-    createdAt: "",
-    chatStatus: "Sender",
-  },
-];
+const initialState: Msg[] = [];
 
 const msgStoreInChat = createSlice({
   initialState,
   name: "msgStoreInChat",
   reducers: {
-    setMsgStoreInChat: (state, action: PayloadAction<initialStateProp>) => {
-      state.push({
-        message: action.payload.message,
-        receiverId: action.payload.receiverId,
-        senderId: action.payload.senderId,
-        createdAt: action.payload.createdAt,
-        chatStatus: action.payload.chatStatus,
-      });
+    setMsgStoreInChat: (state, action: PayloadAction<Msg>) => {
+      const exists = state.some(
+        (msg) =>
+          msg.message === action.payload.message &&
+          msg.senderId === action.payload.senderId &&
+          msg.receiverId === action.payload.receiverId &&
+          msg.createdAt === action.payload.createdAt
+      );
+      if (!exists) {
+        state.push({
+          message: action.payload.message,
+          receiverId: action.payload.receiverId,
+          senderId: action.payload.senderId,
+          createdAt: action.payload.createdAt,
+        });
+      }
     },
   },
 });

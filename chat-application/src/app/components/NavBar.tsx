@@ -10,6 +10,8 @@ import InvitaionModal from "./Nav/InvitaionModal";
 import { setToggleChatToContact } from "../redux/slices/chatToContactTogle";
 import type { ChatToContactToggleStateProp } from "../redux/slices/chatToContactTogle";
 import { IoMdContacts } from "react-icons/io";
+import axios from "axios";
+import { toast } from "sonner";
 const NavBar = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const expandNav = useSelector((state: RootState) => state.expandNav);
@@ -31,6 +33,16 @@ const NavBar = () => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const handleLogout = async () => {
+    try {
+      const res = await axios.get("api/logout");
+      toast.success(res.data.message);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="container flex flex-col h-screen  bg-lime-300">
@@ -90,7 +102,7 @@ const NavBar = () => {
         </div>
 
         <div className="logout text-center bg-red-700 text-white rounded-full p-1 m-2 cursor-pointer">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1" onClick={handleLogout}>
             <CiLogout size={17} strokeWidth={0.6} />
             {!expandNav ? <p className="text-sm">Logout</p> : <></>}
           </div>

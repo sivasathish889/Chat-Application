@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { friendType, userType } from "../../types/user.type";
 
-const friendState: friendType = {
-  inviter_user: "",
-  _id: "",
-  status: 0,
+type initialStateProps = {
+  username: string;
+  _id: string;
+  avatar: string;
+  email: string;
 };
-const initialState: userType = {
+
+const initialState: initialStateProps = {
   username: "",
   _id: "",
   avatar: "",
@@ -16,7 +17,10 @@ const currentChatUser = createSlice({
   initialState,
   name: "currentChatUser",
   reducers: {
-    setCurrentChatUser: (state: userType, action: PayloadAction<userType>) => {
+    setCurrentChatUser: (
+      state: initialStateProps,
+      action: PayloadAction<initialStateProps>
+    ) => {
       state._id = action.payload._id;
       state.avatar = action.payload.avatar;
       state.username = action.payload.username;
@@ -25,5 +29,5 @@ const currentChatUser = createSlice({
   },
 });
 
-export const  setCurrentChatUser = currentChatUser.actions.setCurrentChatUser
-export default currentChatUser.reducer
+export const setCurrentChatUser = currentChatUser.actions.setCurrentChatUser;
+export default currentChatUser.reducer;
