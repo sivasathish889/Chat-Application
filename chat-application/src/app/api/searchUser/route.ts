@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
       { status: 400 }
     );
   }
-  let users = await userModel.find({
+  const users = await userModel.find({
     email: { $regex: `${email}`, $options: "i" },
     _id: { $ne: currentUser._id },
     $or: [

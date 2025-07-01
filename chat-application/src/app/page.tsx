@@ -1,8 +1,7 @@
 "use client";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import Main from "./components/Main";
 import NavBar from "./components/NavBar";
-import ProfileBar from "./components/ProfileBar";
 import SideBar from "./components/SideBar";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";

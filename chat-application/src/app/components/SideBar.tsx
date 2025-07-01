@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ProfileCard from "./SideBar/ProfileCard";
 import StatusCard from "./SideBar/StatusCard";
 import { CgProfile } from "react-icons/cg";

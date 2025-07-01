@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const conservationSchema = new mongoose.Schema(
   {
@@ -26,4 +26,4 @@ const conservationSchema = new mongoose.Schema(
 const ConservationModel =
   mongoose.models.Conversation ||
   mongoose.model("Conversation", conservationSchema);
-module.exports = ConservationModel;
+export default ConservationModel;

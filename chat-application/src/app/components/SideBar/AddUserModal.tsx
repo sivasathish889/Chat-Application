@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Modal from "react-modal";
 import { MdCancel } from "react-icons/md";
 import axios from "axios";
@@ -35,7 +35,7 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
           toast.error(JSON.parse(res.data).message);
         }
       });
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong");
     }
   };
@@ -68,7 +68,7 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
         .finally(() => {
           closeModal();
         });
-    } catch (error) {
+    } catch {
       toast.error("something went wrong");
     }
   };

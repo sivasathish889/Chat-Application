@@ -2,11 +2,10 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { BsEmojiLaughing } from "react-icons/bs";
 import { IoImageOutline, IoMicOutline } from "react-icons/io5";
 import { PiTelegramLogoBold } from "react-icons/pi";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMsgStoreInChat } from "../../redux/slices/msgStoreInChatSlice";
 import { socketContext } from "../../context/socketContext";
-import type { Socket } from "socket.io-client";
 import { RootState } from "../../redux/store";
 import { messageType } from "../../types/message.types";
 
@@ -20,18 +19,17 @@ const MessageSendBar = () => {
   const [emojiOpen, setEmojiOpen] = useState<boolean>(false);
   const [inputData, setInputData] = useState<string | null>("");
 
-  const handleEmojiClick = useCallback((emoji: any) => {
+  const handleEmojiClick = useCallback((emoji: EmojiClickData) => {
     setInputData((prev) => (prev ?? "") + emoji.emoji);
   }, []);
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("connection", (soc: any) => {
+    socket.on("connection", (soc: unknown) => {
       console.log(soc);
     });
 
     socket.on("recievedMsg", (msg: messageType) => {
-
       dispatch(
         setMsgStoreInChat({
           message: msg.message,
@@ -59,7 +57,7 @@ const MessageSendBar = () => {
       socket.off("sender");
       socket.off("disconnect");
     };
-  }, [socket]);
+  }, [socket, dispatch]);
 
   const handleMsgSend = () => {
     if (!inputData || inputData.trim() === "") return;

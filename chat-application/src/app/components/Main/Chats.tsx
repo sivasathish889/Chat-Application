@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";

@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     cookie as string,
     process.env.JWT_SECRET_KEY as string
   )) as JwtPayload;
-  const userData = await userModel.findById((hashingData as any)._id);
+  const userData = await userModel.findById((hashingData as JwtPayload)._id);
   return NextResponse.json({
     message: "Fetched SuccessFully",
     userData: JSON.stringify(userData),

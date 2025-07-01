@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { JwtPayload, verify } from "jsonwebtoken";
 import userModel from "@/src/app/api/lib/models/UserModel";
 import dbConnection from "@/src/app/api/lib/db";
+interface Friend {
+  inviter_user: string;
+  status: string;
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -15,11 +19,8 @@ export async function GET(req: NextRequest) {
       { _id: hashingUserId._id },
       { friend: 1 }
     );
-    const userContactData = user.friend.filter((f: any) => f.status == "2");
-    interface Friend {
-      inviter_user: string;
-      status: string;
-    }
+
+    const userContactData = user.friend.filter((f: Friend) => f.status == "2");
 
     const contactsUsers = await Promise.all(
       userContactData.map(async (item: Friend) => {
@@ -34,7 +35,7 @@ export async function GET(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { message: "Server Error", success: false },
       { status: 500 }

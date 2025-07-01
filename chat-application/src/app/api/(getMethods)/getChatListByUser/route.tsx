@@ -3,12 +3,8 @@ import userModel from "@/src/app/api/lib/models/UserModel";
 import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
 import ConservationModel from "@/src/app/api/lib/models/ConservationModel";
-import { friendType } from "@/src/app/types/user.type";
 
-type userFriendListType = {
-  _id: string;
-  friend: [friendType];
-};
+
 export async function GET(req: NextRequest) {
   dbConnection();
   try {

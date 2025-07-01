@@ -64,7 +64,7 @@ const Login = () => {
                 />
               </div>
               <div className="signup flex  items-center ">
-                <p className="text-xs">If You don't have account?  </p>
+                <p className="text-xs">If You don&apos;t have account?  </p>
                 <Link href={"/sign-up"} className="underline text-sm">
                   Sign Up
                 </Link>

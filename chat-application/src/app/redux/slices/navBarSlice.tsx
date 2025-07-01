@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-let initialState: boolean = true;
+const initialState: boolean = true;
 
 const navExpandSlice = createSlice({
   initialState,

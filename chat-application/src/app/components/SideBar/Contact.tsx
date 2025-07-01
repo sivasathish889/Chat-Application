@@ -21,7 +21,7 @@ const Contact = () => {
         setData(fetchedData.data.contactsUsers);
       };
       fetchUserContacts();
-    } catch (error) {
+    } catch  {
       toast.error("Something Went Wrong");
     }
   }, []);

@@ -1,7 +1,6 @@
-import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const response = NextResponse.json({ message: "Logged out" });
   response.cookies.delete("__token");
   return response;

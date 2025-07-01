@@ -9,10 +9,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const Login = () => {
-  const route = useRouter()
+  const route = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [profile, setProfile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,8 +27,8 @@ const Login = () => {
       .then((data) => {
         if (data.data.success) {
           toast.success(data.data.message);
-          route.replace('/login')
-          setLoading(false)
+          route.replace("/login");
+          setLoading(false);
         } else {
           toast.error(data.data.message);
         }
@@ -49,7 +48,6 @@ const Login = () => {
 
   const handleSetProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setProfile(file);
     if (file) {
       setPreview(URL.createObjectURL(file));
     } else {
