@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { RiUserAddFill } from "react-icons/ri";
 import AddUserModal from "./AddUserModal";

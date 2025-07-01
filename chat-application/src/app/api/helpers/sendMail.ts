@@ -1,17 +1,12 @@
 import { createTransport } from "nodemailer";
+import { mailType } from "../../types/mail.types";
 
-interface mailProps {
-  to: string;
-  subject: string;
-  text?: string;
-}
-
-interface sendMailType extends mailProps {
+interface sendMailType extends mailType {
   from: string;
   html?: string;
 }
 
-const sendMail = async ({ to, subject, text }: mailProps) => {
+const sendMail = async ({ to, subject, text }: mailType) => {
   const transport = createTransport({
     port: Number(process.env.SMTP_PORT),
     host: process.env.SMTP_HOST,

@@ -4,14 +4,11 @@ import userModel from "@/src/app/api/lib/models/UserModel";
 import { compareSync } from "bcryptjs";
 import dbConnection from "../../lib/db";
 import { sign } from "jsonwebtoken";
+import { mailType } from "@/src/app/types/mail.types";
 
-interface mailType {
-  to: string;
-  subject: string;
-  text: string;
-}
+
 export async function POST(req: NextRequest) {
-  dbConnection();
+  dbConnection()
   const formData = await req.formData();
   const email = (formData.get("email") as string) || null;
   const password = formData.get("password") as string;
@@ -62,9 +59,9 @@ export async function POST(req: NextRequest) {
         { status: 200 }
       );
     }
-  } catch {
+  } catch(error) {
     return NextResponse.json(
-      { message: "Server Error", success: false },
+      { message: `Server Error ${error}`, success: false },
       { status: 500 }
     );
   }

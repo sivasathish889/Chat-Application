@@ -1,10 +1,12 @@
-import React, { useState, useCallback } from "react";
+"use client";
+
+import  { useState, useCallback } from "react";
 import Modal from "react-modal";
 import { MdCancel } from "react-icons/md";
 import axios from "axios";
 import { RiUserSearchLine } from "react-icons/ri";
 import Image from "next/image";
-import getAvatarSrc from "../../helpers/getAvatarFormat";
+import getAvatarSrc from "../../api/helpers/getAvatarFormat";
 import { userType } from "../../types/user.type";
 import { toast } from "sonner";
 
@@ -21,10 +23,6 @@ const AddUserModal = ({ modalIsOpen, closeModal }: ModalProps) => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [optionSelect, setOptionSelect] = useState<string>("");
-
-  if (Modal.defaultStyles.overlay) {
-    Modal.defaultStyles.overlay.backgroundColor = "rgba(1,1,1,0.7)";
-  }
 
   const handleSearch = async () => {
     try {

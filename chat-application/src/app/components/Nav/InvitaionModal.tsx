@@ -1,9 +1,11 @@
+"use client";
+
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { userType } from "../../types/user.type";
 import Image from "next/image";
-import getAvatarSrc from "../../helpers/getAvatarFormat";
+import getAvatarSrc from "../../api/helpers/getAvatarFormat";
 import { MdCancel } from "react-icons/md";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUserXmark } from "react-icons/fa6";
@@ -34,7 +36,7 @@ const InvitaionModal = ({ modalIsOpen, closeModal }: ModalProps) => {
         })
         .catch((err) => {
           if (err.response && err.response.data && err.response.data.message) {
-            console.log(err.response.data.message);
+            toast.error(err.response.data.message);
           }
           console.log(err);
         });

@@ -8,6 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const formData = req.formData();
     const inviterId = (await formData).get("inviterId");
+    
     const cookie = req.cookies.get("__token")?.value;
     const currentUserId = verify(
       cookie as string,
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: error, success: false },
+      { message: `Server Error ${error}`, success: false },
       { status: 500 }
     );
   }

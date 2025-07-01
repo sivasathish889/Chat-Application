@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import ChatHeader from "./Main/ChatHeader";
 import Chats from "./Main/Chats";
 import MessageSendBar from "./Main/MessageSendBar";

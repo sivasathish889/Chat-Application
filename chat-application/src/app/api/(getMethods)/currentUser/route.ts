@@ -5,15 +5,24 @@ import dbConnection from "@/src/app/api/lib/db";
 
 export async function GET(req: NextRequest) {
   dbConnection();
-  const cookie = await req.cookies.get("__token")?.value;
-  const hashingData = (await verify(
-    cookie as string,
-    process.env.JWT_SECRET_KEY as string
-  )) as JwtPayload;
-  const userData = await userModel.findById((hashingData as JwtPayload)._id);
-  return NextResponse.json({
-    message: "Fetched SuccessFully",
-    userData: JSON.stringify(userData),
-    success: true,
-  });
+  try {
+    const cookie = req.cookies.get("__token")?.value;
+
+    const hashingData = verify(
+      cookie as string,
+      process.env.JWT_SECRET_KEY as string
+    ) as JwtPayload;
+
+    const userData = await userModel.findById((hashingData as JwtPayload)._id);
+    return NextResponse.json({
+      message: "Fetched SuccessFully",
+      userData: JSON.stringify(userData),
+      success: true,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { message: `Server Error ${error}`, success: false },
+      { status: 500 }
+    );
+  }
 }

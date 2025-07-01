@@ -9,6 +9,12 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const inviter_id = body.id;
     const cookie = req.cookies.get("__token")?.value;
+    if (!cookie) {
+      return NextResponse.json(
+        { message: "No Authorized", success: false },
+        { status: 401 }
+      );
+    }
     const currentUserId = verify(
       cookie as string,
       process.env.JWT_SECRET_KEY as string
@@ -30,28 +36,28 @@ export async function POST(req: NextRequest) {
 
     const updateResult = await userModel.findOneAndUpdate(
       {
-      _id: inviter_id,
-      "friend.inviter_user": currentUserId._id,
+        _id: inviter_id,
+        "friend.inviter_user": currentUserId._id,
       },
       {
-      $set: {
-        "friend.$.status": 2,
-      },
+        $set: {
+          "friend.$.status": 2,
+        },
       },
       { new: true }
     );
 
     if (!updateResult) {
       await userModel.updateOne(
-      { _id: inviter_id },
-      {
-        $push: {
-        friend: {
-          inviter_user: currentUserId._id,
-          status: 2,
-        },
-        },
-      }
+        { _id: inviter_id },
+        {
+          $push: {
+            friend: {
+              inviter_user: currentUserId._id,
+              status: 2,
+            },
+          },
+        }
       );
     }
     // if (updateResult.modifiedCount === 0) {

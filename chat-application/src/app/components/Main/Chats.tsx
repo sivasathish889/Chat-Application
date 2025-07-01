@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -8,8 +9,7 @@ const Chats = () => {
   const currentChatUser = useSelector(
     (state: RootState) => state.currentChatUser
   );
-  console.log("msgInchat", msgInChat);
-  console.log("currentChatuser", currentChatUser);
+
   return (
     <div className=" h-full mx-2 flex flex-col  justify-end overflow-y-scroll ">
       {msgInChat

@@ -5,13 +5,14 @@ const { createContext, useState, useEffect } = require("react");
 
 export const socketContext = createContext();
 
-export const SocketProvioder = ({ children }) => {
+export const SocketProvioder= ({ children }) => {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
-        const socket = io("http://localhost:3001/", {
+        const socket = io("https://socket-server-8ta2.vercel.app/", {
             withCredentials: true,
         });
+        console.log("socket", socket)
         setSocket(socket)
     }, [])
     return (

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { statusDataProps } from "../SideBar";
 import { GoDotFill } from "react-icons/go";
 

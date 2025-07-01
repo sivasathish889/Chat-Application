@@ -10,16 +10,16 @@ interface Friend {
 export async function GET(req: NextRequest) {
   try {
     dbConnection();
-    const cookie = await req.cookies.get("__token")?.value;
-    const hashingUserId = (await verify(
+    const cookie = req.cookies.get("__token")?.value;
+    const hashingUserId = verify(
       cookie as string,
       process.env.JWT_SECRET_KEY as string
-    )) as JwtPayload;
+    ) as JwtPayload;
     const user = await userModel.findOne(
       { _id: hashingUserId._id },
       { friend: 1 }
     );
-
+    // only accepted contacts filter
     const userContactData = user.friend.filter((f: Friend) => f.status == "2");
 
     const contactsUsers = await Promise.all(
@@ -35,9 +35,9 @@ export async function GET(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch {
+  } catch (error) {
     return NextResponse.json(
-      { message: "Server Error", success: false },
+      { message: `Server Error ${error}`, success: false },
       { status: 500 }
     );
   }

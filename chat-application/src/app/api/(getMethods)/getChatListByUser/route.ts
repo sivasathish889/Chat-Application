@@ -4,20 +4,22 @@ import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
 import ConservationModel from "@/src/app/api/lib/models/ConservationModel";
 
-
 export async function GET(req: NextRequest) {
   dbConnection();
   try {
-    const cookie = await req.cookies.get("__token")?.value;
-    const hashingData = (await verify(
+    const cookie = req.cookies.get("__token")?.value;
+    const hashingData = verify(
       cookie as string,
       process.env.JWT_SECRET_KEY as string
-    )) as JwtPayload;
+    ) as JwtPayload;
 
     const userId = hashingData.id || hashingData._id || hashingData.userId;
+
+    // sort and get the both sender and receiver messages
     const userFriendList = await ConservationModel.find({
       $or: [{ senderId: userId }, { receiverId: userId }],
     }).sort({ createdAt: -1 });
+
     const friendIds = userFriendList.map((item) => {
       if (item.senderId == userId) {
         return item.receiverId;
@@ -26,6 +28,7 @@ export async function GET(req: NextRequest) {
       }
       return null;
     });
+    // remove the duplicate Ids
     const uniqueFriendIds = Array.from(
       new Set(friendIds.filter(Boolean).map((id) => id.toString()))
     );
@@ -44,9 +47,8 @@ export async function GET(req: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
-      { message: error, success: false },
+      { message: `Server Error ${error}`, success: false },
       { status: 500 }
     );
   }

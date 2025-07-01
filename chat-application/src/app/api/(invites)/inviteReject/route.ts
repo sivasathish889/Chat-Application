@@ -8,6 +8,12 @@ export async function POST(req: NextRequest) {
   try {
     const { id: inviter_id } = await req.json();
     const cookie = req.cookies.get("__token")?.value;
+    if (!cookie) {
+      return NextResponse.json(
+        { message: "No Authorized", success: false },
+        { status: 401 }
+      );
+    }
     const currentUserId = verify(
       cookie as string,
       process.env.JWT_SECRET_KEY as string
@@ -33,10 +39,9 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   } catch (error) {
-    console.error("Error Rejecting invitation:", error);
     return NextResponse.json(
       {
-        message: "Failed to accept invitation",
+        message: `Server Error ${error}`,
         success: false,
       },
       { status: 500 }

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import { CiLogout, CiMenuFries, CiSettings } from "react-icons/ci";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +14,8 @@ import type { ChatToContactToggleStateProp } from "../redux/slices/chatToContact
 import { IoMdContacts } from "react-icons/io";
 import axios from "axios";
 import { toast } from "sonner";
+
+
 const NavBar = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const expandNav = useSelector((state: RootState) => state.expandNav);

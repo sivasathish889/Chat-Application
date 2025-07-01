@@ -13,7 +13,6 @@ export async function GET(req: NextRequest) {
     )) as JwtPayload;
     const params = req.nextUrl.searchParams;
     const to_userId = params.get("id") || "";
-    console.log(currentUserId._id, to_userId);
     const chats = await ConservationModal.find(
       {
         $or: [
@@ -21,16 +20,15 @@ export async function GET(req: NextRequest) {
           { senderId: to_userId, receiverId: currentUserId._id },
         ],
       },
-      { senderId: 1, receiverId: 1, message: 1, createdAt: 1, _id : 0}
+      { senderId: 1, receiverId: 1, message: 1, createdAt: 1, _id: 0 }
     );
     return NextResponse.json(
       { message: "Chats Fetched", success: true, chats },
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
-      { message: "Server Error", success: false },
+      { message: `Server Error ${error}`, success: false },
       { status: 500 }
     );
   }

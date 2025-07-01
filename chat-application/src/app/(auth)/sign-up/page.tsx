@@ -10,6 +10,7 @@ import Image from "next/image";
 
 const Login = () => {
   const route = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);

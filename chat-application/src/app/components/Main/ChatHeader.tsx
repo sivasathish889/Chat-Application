@@ -1,7 +1,7 @@
+"use client";
 import Image from "next/image";
-import React from "react";
 import { CiMenuKebab } from "react-icons/ci";
-import getAvatarSrc from "../../helpers/getAvatarFormat";
+import getAvatarSrc from "../../api/helpers/getAvatarFormat";
 
 interface ChatHeaderProps {
   currentChatUser: {

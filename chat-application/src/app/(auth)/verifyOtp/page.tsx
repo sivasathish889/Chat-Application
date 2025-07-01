@@ -7,7 +7,9 @@ import { useRouter } from "next/navigation";
 
 const VerifyOtp = () => {
   const route = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
+  
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);

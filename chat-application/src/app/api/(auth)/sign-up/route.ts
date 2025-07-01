@@ -10,11 +10,13 @@ export async function POST(req: NextRequest) {
   dbConnection()
   try {
     const form = await req.formData();
+
     const file = form.get("profileImage") as File;
     const username = (form.get("userName") as string) || null;
     const password = (form.get("password") as string) || null;
     const email = (form.get("email") as string) || null;
     const phone = (Number(form.get("phone")) as number) || null;
+    // profile photo store in server
     const fileData = await file.arrayBuffer();
     let filePath: string | null = null;
     if(file.size !== 0){
@@ -52,10 +54,9 @@ export async function POST(req: NextRequest) {
       { message: "Profile Created", success: true },
       { status: 200 }
     );
-  } catch (error) {
-    console.log(error);
+  } catch(error) {
     return NextResponse.json(
-      { message: "Server Error", success: false },
+      { message: `Server Error ${error}`, success: false },
       { status: 500 }
     );
   }

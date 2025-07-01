@@ -1,4 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+"use client";
+
+import { useCallback, useContext, useEffect, useState } from "react";
 import { BsEmojiLaughing } from "react-icons/bs";
 import { IoImageOutline, IoMicOutline } from "react-icons/io5";
 import { PiTelegramLogoBold } from "react-icons/pi";

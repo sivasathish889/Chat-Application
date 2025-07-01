@@ -1,9 +1,12 @@
 "use client";
+
 import { Provider } from "react-redux";
 import "./globals.css";
 import store from "@/src/app/redux/store";
 import { Toaster } from "sonner";
 import { SocketProvioder } from "@/src/app/context/socketContext";
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
