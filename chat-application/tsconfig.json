@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/login/route.tsx", "src/app/api/helpers/sendMail.js", "src/app/api/(auth)/sign-up/route.tsx", "server.ts", "src/app/socket.js", "src/app/socket.js", "src/app/context/socketContext.jsx", "src/app/api/lib/models/ConservationModel.js", "src/app/api/lib/models/ConservationModel.js", "src/app/api/lib/db.ts", "db.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/login/route.tsx", "src/app/api/helpers/sendMail.js", "src/app/api/(auth)/sign-up/route.tsx", "server.ts", "src/app/socket.js", "src/app/socket.js", "src/app/context/socketContext.jsx", "../socket-server/ConservationModel.js", "../socket-server/ConservationModel.js", "src/app/api/lib/db.ts", "db.js"],
   "exclude": ["node_modules"]
 }

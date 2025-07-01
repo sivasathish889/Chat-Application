@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { CgProfile } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import Image from "next/image";

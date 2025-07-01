@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import userModel from "@/src/app/api/lib/models/UserModel";
 import dbConnection from "@/src/app/api/lib/db";
 import { JwtPayload, verify } from "jsonwebtoken";
-import ConservationModel from "../../lib/models/ConservationModel";
+import ConservationModel from "@/src/app/api/lib/models/ConservationModel";
 import { friendType } from "@/src/app/types/user.type";
 
 type userFriendListType = {
