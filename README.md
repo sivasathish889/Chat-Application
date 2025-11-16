@@ -129,29 +129,6 @@ npm run dev
 
 Application runs on `http://localhost:3000`
 
-## API Endpoints
-
-### Authentication
-- `POST /api/sign-up` - User registration
-- `POST /api/login` - User login
-- `POST /api/verifyOtp` - OTP verification
-- `POST /api/logout` - User logout
-
-### User Management
-- `GET /api/currentUser` - Get current user details
-- `GET /api/searchUser` - Search users by username/email
-- `GET /api/getContacts` - Get user's contact list
-
-### Invitations
-- `POST /api/inviteUser` - Send friend invitation
-- `POST /api/inviteAccept` - Accept friend invitation
-- `POST /api/inviteReject` - Reject friend invitation
-- `GET /api/getInvitedUser` - Get pending invitations
-
-### Messaging
-- `GET /api/getChatListByUser` - Get chat list
-- `GET /api/getUserChat` - Get conversation with specific user
-
 ## Socket Events
 
 ### Client → Server
