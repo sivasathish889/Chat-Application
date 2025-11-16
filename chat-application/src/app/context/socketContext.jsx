@@ -9,7 +9,7 @@ export const SocketProvioder= ({ children }) => {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
-        const socket = io("https://socket-server-8ta2.vercel.app/", {
+        const socket = io("http://localhost:3001", {
             withCredentials: true,
         });
         console.log("socket", socket)
@@ -21,3 +21,4 @@ export const SocketProvioder= ({ children }) => {
         </socketContext.Provider>
     )
 }
+// https://socket-server-8ta2.vercel.app/
