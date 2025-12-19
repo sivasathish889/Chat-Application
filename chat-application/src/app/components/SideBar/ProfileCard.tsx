@@ -6,26 +6,12 @@ import axios from "axios";
 import Image from "next/image";
 import getAvatarSrc from "../../api/helpers/getAvatarFormat";
 import ProfileCardSkel from "../skeleton/ProfileCardSkel";
+import { useGlobalContext } from "../../context/globalContext";
 
 const ProfileCard = () => {
-  const [userData, setUserData] = useState({
-    username: "",
-    avatar: "",
-    status: "",
-  });
 
-  // Fetch user data
-  useEffect(() => {
-    const fetchUser = async () =>
-      await axios
-        .get("api/currentUser")
-        .then((data) => {
-          setUserData(JSON.parse(data.data.userData));
-        })
-        .catch((err) => console.log(err));
-    fetchUser();
-  }, []);
 
+  const { userData } = useGlobalContext()
   return (
     <>
       <div className="profile-card flex justify-center items-center px-2 py-2">

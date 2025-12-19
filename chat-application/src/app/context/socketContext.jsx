@@ -12,7 +12,6 @@ export const SocketProvioder= ({ children }) => {
         const socket = io("http://localhost:3001", {
             withCredentials: true,
         });
-        console.log("socket", socket)
         setSocket(socket)
     }, [])
     return (

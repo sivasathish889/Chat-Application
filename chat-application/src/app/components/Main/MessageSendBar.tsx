@@ -19,11 +19,12 @@ const MessageSendBar = () => {
     (state: RootState) => state.setContactToChat
   );
   const [emojiOpen, setEmojiOpen] = useState<boolean>(false);
-  const [inputData, setInputData] = useState<string | null>("");
+  const [inputData, setInputData] = useState<string>("");
 
   const handleEmojiClick = useCallback((emoji: EmojiClickData) => {
-    setInputData((prev) => (prev ?? "") + emoji.emoji);
+    setInputData((prev) => prev + emoji.emoji);
   }, []);
+  
   useEffect(() => {
     if (!socket) return;
 
@@ -61,6 +62,7 @@ const MessageSendBar = () => {
     };
   }, [socket, dispatch]);
 
+    
   const handleMsgSend = () => {
     if (!inputData || inputData.trim() === "") return;
     const currentChatUserId = currentChatUser._id;
@@ -89,7 +91,7 @@ const MessageSendBar = () => {
           name="text"
           id="text"
           className="w-full rounded-full h-10 relative px-10 pe-20 outline-none bg-gray-400/50 text-sm"
-          value={inputData ?? ""}
+          value={inputData}
           onChange={(e) => setInputData(e.target.value)}
           onClick={() => setEmojiOpen(false)}
         />

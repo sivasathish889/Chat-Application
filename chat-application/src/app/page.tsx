@@ -18,7 +18,7 @@ export default function Home() {
       >
         <NavBar  />
       </nav>
-      <section className="w-60 min-w-40 bg-primary max-md:hidden transition-all duration-300">
+      <section className="w-60 min-w-40 bg-primary  transition-all duration-300">
         <Suspense fallback={"Loading..."}>
           <SideBar />
         </Suspense>
